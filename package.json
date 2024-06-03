@@ -1,0 +1,35 @@
+{
+  "name": "staking-faucet",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "pidb <jackson.libc.rs@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "lint:fix": "prettier */*.js \"*/**/*{.js,.ts}\" -w",
+    "lint": "prettier */*.js \"*/**/*{.js,.ts}\" --check",
+    "fundint": "nodemon --exec ts-node funding.ts",
+    "false-start": "nodemon --exec ts-node false_start.ts",
+    "migration": "npx prisma migrate dev --name init"
+  },
+  "dependencies": {
+    "@bitcoinerlab/secp256k1": "^1.1.1",
+    "axios": "^1.7.2",
+    "bip32": "^2.0.4",
+    "bip39": "^3.0.2",
+    "bitcoinjs-lib": "^6.1.5",
+    "commander": "^4.0.1",
+    "dotenv": "^16.4.5",
+    "ecpair": "^2.1.0",
+    "tiny-secp256k1": "^2.2.3",
+    "uuid": "^9.0.1",
+    "varuint-bitcoin": "^1.1.2",
+    "winston": "^3.13.0",
+    "@bitcoin-js/tiny-secp256k1-asmjs": "^2.2.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.13",
+    "nodemon": "^3.1.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "entropy": "670d95af9d325c86f697ccb73fdf55da",
+    "mnemonic": "grow hole hip denial chair drop surge wet rescue year step region",
+    "seed": "b067d3bf3db0f640d9d5a96a1bbefa7b131762b627d5ea43c0106b7f15ba742a98757015ba2c60b914831049d4b995ee4284ebab322e9f4ca7c7e25683a3d2ba",
+    "xprivMaster": "tprv8ZgxMBicQKsPeEgPnXNvxUv6JSVSx9f3M5uzaWUpGZdrKHgbx8a5npRd41bcqVqUAx7JufkGstWcmy88GVyZ88bjVnwHM7Qq8CikWYYob6r",
+    "privKeyMaster": "6b3dd5974ed9ead03e3129f9da3857a0da65b9b4a4f2b93d96224ae9cc104b3f",
+    "wifMaster": "cRBAXvVgTiv8kidToENzycPv7mM84gkByPoaxzsT6k5RDqLRdPV3",
+    "taprootAddressMaster": "tb1pnm2qz4quc74xzq4nvdc9ujlcahvmyyms0gufcq4mdz79p58w6a3s52jrta",
+    "xpubMaster": "tpubD6NzVbkrYhZ4XhiBgB3XMtaCsU1P7UqwvPWms2X7gqSF9mwNaXPfyK3VE9JGPCs7E2wHep247swzFKRxxvnKBwfHTsTmv3jsvpZ7EqaV9M5",
+    "pubKeyMaster": "02ce95a862ee6956379d93f50c5b484b8e36df0d932d58c32c2e089a8ac5d2520e",
+    "pubKeyFingerprintMaster": "dc86ec11"
+  },
+  {
+    "entropy": "8d28f1c198e30244be197015c07c3cc3",
+    "mnemonic": "minor elegant idea crack coral car wear come beyond advance august manual",
+    "seed": "d082c3a07281397f0d16a6eefb4121295268f291ca9155fc660205898e44c897192b1db582f81c6d8c60f67fdd299cbadbaecd9b7f1d8b773c86332818b0a5b2",
+    "xprivMaster": "tprv8ZgxMBicQKsPd3KjpbRJqGZ9vshr6fYZgbyRv65SVhmvon4zK9dtDF4DBmE5oGjtftCkiGBU5dPCvhdMQ21VB6zJTtsJo1xPimAC2nbEtHs",
+    "privKeyMaster": "a220ed56a87814f24b1d5453ebc070dc428e7558ed4724ab8d1037bac900fa56",
+    "wifMaster": "cT1rkEFLweqFLAF3LxnHfFLwinM7YqHLK3c5w9gyCMEZAUqFG4j1",
+    "taprootAddressMaster": "tb1pm7fmvrnnl2m3nfgnj96e53e4rvwemmd42mccg4uq8xx4cml84tjsyhy3j4",
+    "xpubMaster": "tpubD6NzVbkrYhZ4WWMXiF5uEgDGVuDnFzjUFuaDCc7juyaKeGKkwYTUPjg5MsxdWG3AkCAPRux22F35cBcjh9bii1gPuJ3hMwVgi7XtQphRWyF",
+    "pubKeyMaster": "028616947ce785619a3ddb61cf7981c41b11393db470ba2abb7f68de82d11306dc",
+    "pubKeyFingerprintMaster": "640a9b18"
+  },
+  {
+    "entropy": "5b15341f9880b10ba36b627dec919296",
+    "mnemonic": "force predict among country arch magic misery hobby law goose gorilla coast",
+    "seed": "201510d6ef721d697309080586f42d86b3111daa70d67e8c073c43dba62c75c89a2c56ab9c02795430d7970a053747b14bec97ae1309dcce50f67df8aa4c5e3d",
+    "xprivMaster": "tprv8ZgxMBicQKsPdioayw7fNVPmjtFdvcrKyYnMQiqgJ4JPo2sZH46PeUUryhZw95sxcgegBaw6KgJD4srmKqyYrES4Ke3HGztjrsKzHUDK1zQ",
+    "privKeyMaster": "3d3b036917ebe3d759b2a22856805d2d628ff1de6f2e50d7226f577e3b54ea83",
+    "wifMaster": "cPdj3kQBr4JDRSNw3E9hVTLyW63tvHTQzgYWQxrEES6b6Uxhzydg",
+    "taprootAddressMaster": "tb1p4pae9mmhguj46k2cudxpehel3xazfw09tqhck2hrdufl5wrveqqqw3cv3t",
+    "xpubMaster": "tpubD6NzVbkrYhZ4XBqNsanFmu3tJuma5x3EYrP8hEsyiL6ndX8KuSuypy6j9q2XAaEtae21LrbXvvnRP3PTRffhkFFHfjxgCv888mKWnszJjr4",
+    "pubKeyMaster": "0280a5a379244bcb6cf42ee29f2896f73b7786fb8e1a1cce84ef1f6d9aab0a9f4c",
+    "pubKeyFingerprintMaster": "f75432f9"
+  }
+]
