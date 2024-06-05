@@ -18,7 +18,7 @@ export const buildStakingPsbt = async (
   stakingAmountSat: number,
   address: string,
   stakerPublickKeyNoCoord: string,
-  fasterFeePower?: number,
+  fasterFeePower: number,
 ): Promise<Psbt> => {
   if (
     !finalityProvider ||
@@ -55,7 +55,7 @@ export const buildStakingPsbt = async (
   let feeRate: number;
   try {
     const netWorkFee = await btcWallet.getNetworkFees();
-    feeRate = netWorkFee.fastestFee * fasterFeePower ? fasterFeePower : 10;
+    feeRate = netWorkFee.fastestFee * fasterFeePower;
   } catch (error) {
     throw new Error("Cannot get network fees");
   }

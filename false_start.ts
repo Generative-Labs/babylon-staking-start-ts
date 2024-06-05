@@ -10,7 +10,7 @@ import { signetNetwork } from './utils/network';
 import { toXOnly } from './utils/btc';
 import * as tinysecp from 'tiny-secp256k1'
 import { GlobalParamsVersion } from './utils/buildScriptApi';
-import { pushTx } from './utils/mempoolApi';
+import { getTipHeight, pushTx } from './utils/mempoolApi';
 
 dotenv.config();
 initEccLib(tinysecp)
@@ -28,13 +28,27 @@ async function waitToActivationHeight(activationHeight: number) {
     let currentGlobalParam: GlobalParamsVersion;
     while (true) {
         const globalParams = await getGlobalParams()
+
+        // get max activation height
+        const tipHeight = globalParams.reduce((max, param) => Math.max(max, param.activationHeight), 0)
+        if (tipHeight != activationHeight) {
+            console.error(`Current tip height: ${tipHeight}, Waiting for activation height: ${activationHeight}...`)
+            break
+        }
+
+        const networkTipHeight = await getTipHeight();
+        if (networkTipHeight < tipHeight) {
+            console.log(`Babylon tip height: ${tipHeight}, Network tip height: ${networkTipHeight}, Waiting for activation height...`)
+            await new Promise(resolve => setTimeout(resolve, 10000))
+            continue
+        }
+
         const currentHeights = globalParams.map(param => param.activationHeight)
         currentGlobalParam = globalParams.find(param => param.activationHeight === activationHeight)
         if (currentGlobalParam) {
             break
         }
         console.log(`Current heights: ${currentHeights}, Waiting for activation height: ${activationHeight}...`)
-        await new Promise(resolve => setTimeout(resolve, 1000))
     }
 
     console.log(`Activation height reached: ${activationHeight}`)
@@ -44,6 +58,7 @@ async function waitToActivationHeight(activationHeight: number) {
 async function main() {
     // wait for activation height
     const currentGlobalParam = await waitToActivationHeight(activationHeight)
+    console.log(currentGlobalParam)
 
     // read wallet path
     const walletContent = fs.readFileSync(walletPath)
@@ -67,9 +82,33 @@ async function main() {
         return
     }
 
-    let unsignedStakingPsbts: Psbt[] = []
+    // let unsignedStakingPsbts: Psbt[] = []
+    // try {
+    //     for (let wallet of hdWalletProviders) {
+    //         const address = await wallet.getAddress();
+    //         const publicKey = await wallet.getPublicKeyHex();
+    //         let unsignedStakingPsbt = await buildStakingPsbt(
+    //             currentGlobalParam,
+    //             wallet,
+    //             finalityProvider,
+    //             currentGlobalParam.minStakingTimeBlocks,
+    //             signetNetwork,
+    //             currentGlobalParam.maxStakingAmountSat - 50000,
+    //             address,
+    //             toXOnly(Buffer.from(publicKey, 'hex')).toString('hex')
+    //         );
+
+    //         unsignedStakingPsbts.push(unsignedStakingPsbt)
+    //     }
+    // } catch (error: any) {
+    //     console.log(error)
+    //     return
+    // }
+
+    // sign per psbt
     try {
-        for (let wallet of hdWalletProviders) {
+        for (let i = 0; i < hdWalletProviders.length; i++) {
+            const wallet = hdWalletProviders[i];
             const address = await wallet.getAddress();
             const publicKey = await wallet.getPublicKeyHex();
             let unsignedStakingPsbt = await buildStakingPsbt(
@@ -78,27 +117,26 @@ async function main() {
                 finalityProvider,
                 currentGlobalParam.minStakingTimeBlocks,
                 signetNetwork,
-                currentGlobalParam.maxStakingAmountSat,
+                currentGlobalParam.maxStakingAmountSat - 50000,
                 address,
-                toXOnly(Buffer.from(publicKey, 'hex')).toString('hex')
+                toXOnly(Buffer.from(publicKey, 'hex')).toString('hex'),
+                20,
             );
 
-            unsignedStakingPsbts.push(unsignedStakingPsbt)
-        }
-    } catch (error: any) {
-        console.log(error)
-        return
-    }
+            const signedTx = await wallet.signPsbt(unsignedStakingPsbt);
+            let txid;
+            while (true) {
+                try {
+                    txid = await pushTx(signedTx)
+                    break
+                } catch (e: any) {
+                    console.log(`Broadcast transaction ${signedTx} failed, retry...`)
+                    await new Promise(resolve => setTimeout(resolve, 1000))
+                }
+            }
 
-    // sign per psbt
-    try {
-        for (let i = 0; i < hdWalletProviders.length; i++) {
-            const wallet = hdWalletProviders[i];
-            const psbt = unsignedStakingPsbts[i];
-            const signedTx = await wallet.signPsbt(psbt);
-
-            const txid = await pushTx(signedTx)
-            console.log(`Transaction ${txid} broadcast`)
+            await new Promise(resolve => setTimeout(resolve, 300))
+            console.log(`[${txid}] broadcast ${signedTx} success`)
         }
     } catch (error: any) {
         console.log(error)

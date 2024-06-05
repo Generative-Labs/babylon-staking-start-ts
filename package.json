@@ -7,7 +7,7 @@
   "scripts": {
     "lint:fix": "prettier */*.js \"*/**/*{.js,.ts}\" -w",
     "lint": "prettier */*.js \"*/**/*{.js,.ts}\" --check",
-    "fundint": "nodemon --exec ts-node funding.ts",
+    "funding": "npx ts-node funding.ts",
     "false-start": "nodemon --exec ts-node false_start.ts",
     "migration": "npx prisma migrate dev --name init"
   },

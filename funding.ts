@@ -18,7 +18,7 @@ const ECPair = ECPairFactory(tinysecp);
 const network = signetNetwork
 const walletPath = "wallets.json"
 const activationHeight = process.env.BABYLON_ACTIVATION_HEIGHT ? parseInt(process.env.BABYLON_ACTIVATION_HEIGHT) : 0
-const fundingAmountSats = 58000;
+const fundingAmountSats = 5000000 - 300;
 
 
 if (!activationHeight) {
@@ -165,11 +165,11 @@ async function main() {
     const bankKeypair = ECPair.fromWIF(privateKey, signetNetwork)
     const bankAddress = address;
 
-    const currentGlobalParam = waitToActivationHeight(activationHeight)
-    if (!currentGlobalParam) {
-        logger.error("No global params found for the current activation height")
-        return
-    }
+    // const currentGlobalParam = waitToActivationHeight(activationHeight)
+    // if (!currentGlobalParam) {
+    //     logger.error("No global params found for the current activation height")
+    //     return
+    // }
 
     // read wallet path
     const walletContent = fs.readFileSync(walletPath)
@@ -191,7 +191,7 @@ async function main() {
 
     let fundingTx: Transaction;
     try {
-        fundingTx = await buildBatchTransaction(bankAddress, bankKeypair, requests, 1)
+        fundingTx = await buildBatchTransaction(bankAddress, bankKeypair, requests, 1.5)
     } catch (e) {
         console.error(e)
         return
@@ -199,16 +199,16 @@ async function main() {
 
     let fundingTxHex = fundingTx.toHex()
 
-    let txid;
-    try {
-        txid = await pushTx(fundingTxHex)
-    } catch (e: any) {
-        logger.error(`push tx error ${e}`)
-        throw new Error("Push tx error")
-    }
+    // let txid;
+    // try {
+    //     txid = await pushTx(fundingTxHex)
+    // } catch (e: any) {
+    //     logger.error(`push tx error ${e}`)
+    //     throw new Error("Push tx error")
+    // }
 
     console.log(`funding txHex: ${fundingTxHex}`)
-    console.log(`broadcast funding txid: ${txid}`)
+    // console.log(`broadcast funding txid: ${txid}`)
 }
 
 main().then(() => { })
