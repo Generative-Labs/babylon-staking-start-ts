@@ -2,9 +2,8 @@
 
 /**
  * Features
- * - Generate wallets (Alice, Bob, Carol, Dave Eve, Mallory)
+ * - Generate taproot wallets 
  * - Create a json file with all cryptographic materials
- * - Import private keys to Bitcoin Core
  */
 const crypto = require("crypto")
 const program = require('commander')
@@ -81,25 +80,6 @@ for (let i = 0; i < accountNumber; i++) {
     )
 }
 
-// if (program.entropy) {
-//     wallets = [
-//         { alice: crypto.randomBytes(Number(program.entropy)).toString("hex") },
-//         { bob: crypto.randomBytes(Number(program.entropy)).toString("hex") },
-//         { carol: crypto.randomBytes(Number(program.entropy)).toString("hex") },
-//         { dave: crypto.randomBytes(Number(program.entropy)).toString("hex") },
-//         { eve: crypto.randomBytes(Number(program.entropy)).toString("hex") },
-//         { mallory: crypto.randomBytes(Number(program.entropy)).toString("hex") }
-//     ]
-// } else {
-//     wallets = [
-//         { alice: '182301471f6892728ae56bb95b54396e' },
-//         { bob: '28c8b37e1462a460fafa440d3ec66d29' },
-//         { carol: '61628dbe355f4675d895d399b984aaf4' },
-//         { dave: '6dc790b775c765abbbd981c0cdbbce9e' },
-//         { eve: 'd8ec0331d6228a59b17cb412700761f0' },
-//         { mallory: '6af8462dd020ff7e2239a0a346d27448' }
-//     ]
-// }
 
 // Conditional log
 const log = (s, v) => {
