@@ -33,3 +33,4 @@ airdrop_status.json
 *.csv
 fund.json
 wallets.json
+*.txt

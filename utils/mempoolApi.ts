@@ -4,8 +4,6 @@
 // The base URL for the signet API
 // Utilises an environment variable specifying the mempool API we intend to
 
-import { logger } from "./logger";
-
 // utilise
 const mempoolAPI = `https://babylon.mempool.space/signet/api/`;
 

@@ -52,13 +52,15 @@ export const buildStakingPsbt = async (
   } catch (error: Error | any) {
     throw new Error(error?.message || "Cannot build staking scripts");
   }
-  let feeRate: number;
-  try {
-    const netWorkFee = await btcWallet.getNetworkFees();
-    feeRate = netWorkFee.fastestFee * fasterFeePower;
-  } catch (error) {
-    throw new Error("Cannot get network fees");
-  }
+
+  let feeRate = fasterFeePower;
+  // let feeRate: number;
+  // try {
+  //   const netWorkFee = await btcWallet.getNetworkFees();
+  //   feeRate = netWorkFee.fastestFee * fasterFeePower;
+  // } catch (error) {
+  //   throw new Error("Cannot get network fees");
+  // }
   let unsignedStakingPsbt;
   try {
     const { psbt } = stakingTransaction(
