@@ -199,16 +199,7 @@ async function main() {
 
     let fundingTxHex = fundingTx.toHex()
 
-    // let txid;
-    // try {
-    //     txid = await pushTx(fundingTxHex)
-    // } catch (e: any) {
-    //     logger.error(`push tx error ${e}`)
-    //     throw new Error("Push tx error")
-    // }
-
     console.log(`funding txHex: ${fundingTxHex}`)
-    // console.log(`broadcast funding txid: ${txid}`)
 }
 
 main().then(() => { })

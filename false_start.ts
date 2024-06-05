@@ -82,29 +82,6 @@ async function main() {
         return
     }
 
-    // let unsignedStakingPsbts: Psbt[] = []
-    // try {
-    //     for (let wallet of hdWalletProviders) {
-    //         const address = await wallet.getAddress();
-    //         const publicKey = await wallet.getPublicKeyHex();
-    //         let unsignedStakingPsbt = await buildStakingPsbt(
-    //             currentGlobalParam,
-    //             wallet,
-    //             finalityProvider,
-    //             currentGlobalParam.minStakingTimeBlocks,
-    //             signetNetwork,
-    //             currentGlobalParam.maxStakingAmountSat - 50000,
-    //             address,
-    //             toXOnly(Buffer.from(publicKey, 'hex')).toString('hex')
-    //         );
-
-    //         unsignedStakingPsbts.push(unsignedStakingPsbt)
-    //     }
-    // } catch (error: any) {
-    //     console.log(error)
-    //     return
-    // }
-
     // sign per psbt
     try {
         for (let i = 0; i < hdWalletProviders.length; i++) {
